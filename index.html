@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>
+        Search Internships : Internmeets
+    </title>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' rel='stylesheet'
+        integrity='sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB' crossorigin='anonymous'>
+    <link href='https://fonts.cdnfonts.com/css/open-sans' rel='stylesheet'>
+    <link href='https://fonts.cdnfonts.com/css/oswald-4' rel='stylesheet'>
+    <style>
+        @font-face {
+            font-family: 'Hero Light Regular';
+            font-style: normal;
+            font-weight: normal;
+            src: local('Hero Light Regular'), url('./hero-font/HeroLight-Regular.woff') format('woff');
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Hero Light Regular';
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* nav-menu popups */
+        .nav-item,
+        .profile-item {
+            position: relative;
+        }
+
+        .nav-trigger,
+        .profile-trigger {
+            background: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-popup {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+
+            background-color: white;
+            min-width: 220px;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .profile-popup {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+
+            background-color: white;
+            min-width: 200px;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .nav-popup a,
+        .profile-popup a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .nav-popup a:hover,
+        .profile-popup a:hover {
+            text-decoration: none;
+            color: #9747FF;
+        }
+
+
+        .profile span img {
+            filter: invert(1);
+        }
+
+        .searchbar {
+            background-color: #f1f1f1;
+            border-radius: 30px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            /* justify-content: center; */
+            gap: 10px;
+        }
+
+        .searchbar input,
+        .footer-container input {
+            border: none;
+            outline: none;
+            background-color: transparent;
+        }
+
+        .searchbar img {
+            width: 16px;
+            height: 16px;
+        }
+
+        .nav-extras {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+        }
+
+        .profile-icon {
+            width: 28px;
+            filter: invert(1);
+        }
+
+
+        .icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .profile {
+            background-color: rgb(63, 7, 7);
+            border-radius: 20px;
+            padding: 2px 5px;
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+
+        }
+
+        .profile img {
+            border-radius: 50%;
+        }
+
+        .notification {
+            position: relative;
+            padding: 0px !important;
+        }
+
+
+        #notification-dot,
+        #home-dot {
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            font-size: 10px;
+            color: white;
+        }
+
+        #notification-dot {
+            right: 10%;
+            padding: 5px;
+        }
+
+        #home-dot {
+            top: 5px;
+            right: 60%;
+            padding: 0px 5px;
+        }
+
+        /* Mobile navigation */
+        .hamburger {
+            display: none;
+        }
+
+        .mobile-menu {
+            display: contents;
+        }
+
+        /* navigation ends */
+
+
+
+        .row {
+            margin-bottom: 30px;
+        }
+
+        .container1 {
+            border-radius: 30px;
+            background-color: #f1f1f1;
+            padding: 15px;
+        }
+
+        .container2 {
+            border-radius: 30px;
+            border: 2px solid #f1f1f1;
+            padding: 15px;
+        }
+
+        .container1 .menu div {
+            padding-bottom: 40px;
+        }
+
+        .theme {
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+            width: fit-content;
+            background: linear-gradient(black, rgb(110, 110, 110), white);
+            border-radius: 30px;
+        }
+
+        .theme-wrapper {
+            display: flex;
+            justify-content: end;
+            margin-top: -100px;
+            padding: 20px;
+        }
+
+        .theme img {
+            width: 28px;
+        }
+
+        .filter img {
+            width: 24px;
+        }
+
+        .ranges {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .ranges span {
+            border: 1px solid black;
+            border-radius: 30px;
+            padding: 10px;
+        }
+
+        .filter-menu .input {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .filter-menu .input label {
+            margin-bottom: 10px;
+        }
+
+        .range-input {
+            padding: 0 !important;
+        }
+
+        .filter-menu .input input,
+        .filter-menu .input select {
+            border-radius: 20px;
+            border: 1px solid #c4c4c4;
+            outline: none;
+            padding: 10px;
+            color: #696969;
+        }
+
+        .filter-menu .input .range-input,
+        .button div button,
+        .footer-container button {
+            border: 1px solid #c4c4c4;
+            border-radius: 20px;
+            padding: 5px 20px;
+        }
+
+        /* background-color: white; */
+
+        .container3 .cards {
+            height: 130vh;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+
+        .card-container {
+            padding: 20px 30px;
+            margin: 20px 0;
+            border: 2px solid #f1f1f1;
+            border-radius: 20px;
+        }
+
+        .c-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .c-name {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .c-name div p {
+            color: #828282;
+        }
+
+        .company {
+            width: 164px;
+        }
+
+        .card-details,
+        .card-details-data {
+            display: flex;
+            margin: 15px 0 0 0;
+        }
+
+        .card-details {
+            color: #828282;
+            gap: 20px;
+        }
+
+        .card-details-data {
+            font-size: 14px;
+            gap: 50px;
+        }
+
+        .remain-time,
+        .jobtype {
+            padding: 5px 15px;
+            border-radius: 30px;
+        }
+
+        .remain-time {
+            background-color: #DBFFEE;
+            color: #2FAA6F;
+        }
+
+        .jobtype {
+            background-color: #f1f1f1;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .card-button button {
+            border: 1px solid #c4c4c4;
+            border-radius: 20px;
+            padding: 5px 20px;
+        }
+
+        .footer {
+            padding: 30px 30px 10px 30px;
+            background-color: #9747FF;
+            color: white;
+        }
+
+        .footer .arrow {
+            filter: invert(1);
+            rotate: 180deg;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            padding-top: 20px;
+        }
+
+        .footer-container input {
+            color: #f1f1f1;
+        }
+
+        .footer-container input::placeholder {
+            /* opacity: 0.8; */
+            font-size: 14px;
+            color: white;
+        }
+
+        .footer-container a,
+        .footer-container p {
+            font-size: 14px;
+            text-decoration: none;
+            color: white;
+            margin-bottom: 0px;
+
+        }
+
+        .footer-container .subscribe {
+            border: 1px solid #c4c4c4;
+            padding: 10px;
+            border-radius: 30px;
+            display: flex;
+        }
+
+        .footer-container .footer-div {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .footer-container .social-media {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            padding-top: 10px;
+        }
+
+        .color-btn {
+            background-color: #9747FF;
+            color: white;
+        }
+
+        .white-btn {
+            background-color: white;
+        }
+
+        .color-btn:hover {
+            background-color: white;
+            color: #9747FF;
+            border: 1px solid #9747FF;
+            transition: 0.3s;
+        }
+
+        .white-btn:hover {
+            background-color: #9747FF;
+            color: white;
+            transition: 0.3S;
+        }
+
+
+        @media screen and (max-width:320px) {
+            .ranges {
+                /* justify-content: space-betweens; */
+            }
+
+            .ranges span {
+                font-size: 14px;
+                padding: 5px;
+            }
+        }
+
+        @media screen and (max-width:425px) {
+            .footer-container {
+                justify-content: start;
+                gap: 20px;
+            }
+
+            .footer-container .footer-div {
+                gap: 0px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+            }
+
+            .footer-container .subscribe {
+                padding: 5px;
+                width: fit-content;
+            }
+        }
+
+        @media screen and (max-width:1024px) {
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                padding-right: 10px;
+            }
+
+            .mobile-menu {
+                display: none;
+                position: absolute;
+                top: 75px;
+                right: 0;
+                background: #fff;
+
+                flex-direction: column-reverse;
+                justify-content: flex-start;
+                gap: 20px;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            }
+
+            .nav {
+                flex-direction: column;
+                align-items: start;
+            }
+
+            .searchbar .main-search {
+                max-width: fit-content;
+            }
+
+            .mobile-menu.active {
+                display: flex;
+            }
+
+            .ranges span {
+                font-size: 14px;
+                padding: 5px;
+            }
+
+            .footer-container {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header container">
+        <div>
+            <img src="img/logo-black.png" alt="">
+        </div>
+
+        <div class="hamburger" id="hamburger">☰</div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="nav">
+                <div class="nav-item">
+                    <button class="nav-trigger">
+                        Internships
+                        <span id="internships"><img src="img/arrow-icon.png" alt="" width="20px"></span>
+                    </button>
+                    <div class="nav-popup">
+                        <a href="#">Web Development</a>
+                        <a href="#">Android</a>
+                        <a href="#">Data Science</a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <button class="nav-trigger">
+                        Jobs
+                        <span id="jobs"><img src="img/arrow-icon.png" alt="" width="20px"></span>
+                    </button>
+                    <div class="nav-popup">
+                        <a href="#">Fresher Jobs</a>
+                        <a href="#">Remote Jobs</a>
+                        <a href="#">Part Time</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-trigger">
+                        Certification Courses
+                        <span id="courses"><img src="img/arrow-icon.png" alt="" width="20px"></span>
+                    </button>
+                    <div class="nav-popup">
+                        <a href="#">Full Stack Web Development</a>
+                        <a href="#">Frontend Development</a>
+                        <a href="#">Backend Development</a>
+                        <a href="#">Mobile App Development</a>
+                        <a href="">Data Science</a>
+                        <a href="">Data Analytics</a>
+                        <a href="">Cloud Computing</a>
+                        <a href="">Ethical Hacking</a>
+                        <a href="">SOC Analyst</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-trigger">
+                        Training
+                        <span id="training"><img src="img/arrow-icon.png" alt="" width="20px"></span>
+                    </button>
+                    <div class="nav-popup">
+                        <a href="#">Programming Languages</a>
+                        <a href="#">Web Technologies</a>
+                        <a href="#">Data Tools</a>
+                        <a href="">Cloud Tools</a>
+                        <a href="">Testing & QA</a>
+                        <a href="">Deployment Training</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-trigger">
+                        More
+                        <span id="more"><img src="img/arrow-icon.png" alt="" width="20px"></span>
+                    </button>
+                    <div class="nav-popup">
+                        <a href="#">Career Resources</a>
+                        <a href="#">Scholarships</a>
+                        <a href="#">Competitions & Hackathons</a>
+                        <a href="">Bootcamps</a>
+                        <a href="">Mentorship Programs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="searchbar main-search">
+                <img src="img/search-icon.png" alt="" width="32">
+                <input type="text" name="main-search" id="main-search" placeholder="Search Internships">
+            </div>
+            <div class="nav-extras">
+                <img src="img/bookmark-icon.png" alt="" class="icon">
+                <img src="img/message-icon.png" alt="" class="icon">
+                <div class="notification">
+                    <img src="img/notification-icon.png" alt="" class="icon">
+                    <span id="notification-dot"></span>
+                </div>
+
+                <div class="profile profile-item">
+                    <img src="img/user-profile-icon.webp" alt="" class="profile-icon">
+                    <span class="profile-trigger"><img src="img/arrow-icon.png" alt="" class="icon"></span>
+                    <div class="profile-popup">
+                        <a href="">Profile</a>
+                        <a href="">Username</a>
+                        <a href="">Account Settings</a>
+                        <a href="">Privacy & Security</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="font-size: 18px; text-align: center; background-color: #f1f1f1; padding: 20px 0px 10px 0px;">
+        <p class="mb-0">
+            Unlock Your Career
+        </p>
+        <p>
+            Potential with InternMeets
+        </p>
+    </div>
+
+    <div class="container">
+        <div style="display: flex; gap:10px ; padding: 20px 0;">
+            <p>
+                Home
+            </p>
+            <p>
+                >
+            </p>
+            <p>
+                Internships
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class=" col-lg-3 col-md-12 col-sm-12">
+                <div class="">
+                    <div class="" style="padding: 30px 0px;">
+                        <img src="img/menu-square.png" alt="" class="icon">
+                        <span>Menu</span>
+                    </div>
+                    <div class="container1">
+                        <img src="img/star-icon.png" alt="" width="" class="icon">
+
+                        <div class="menu" style="padding: 40px 20px;">
+                            <div class="notification">
+                                <div>
+                                    <img src="img/home-icon.png" alt="" class="icon">
+                                    <span>Home</span>
+                                </div>
+                                <span id="home-dot">1</span>
+                            </div>
+                            <div>
+                                <img src="img/application-icon.png" alt="" class="icon">
+                                <span>My application</span>
+                            </div>
+                            <div>
+                                <img src="img/file-icon.png" alt="" class="icon">
+                                <span>Edit Resume</span>
+                            </div>
+                            <div>
+                                <img src="img/edit-icon.png" alt="" class="icon">
+                                <span>Edit Preferences</span>
+                            </div>
+                            <div>
+                                <img src="img/safety-icon.png" alt="" class="icon">
+                                <span>Safety Tips</span>
+                            </div>
+                            <div>
+                                <img src="img/help-icon.png" alt="" class="icon">
+                                <span>Help Center</span>
+                            </div>
+
+                            <div>
+                                <hr>
+                            </div>
+
+                            <div>
+                                <img src="img/user-account-icon.png" alt="" class="icon">
+                                <span>Manage account</span>
+                            </div>
+                            <div>
+                                <img src="img/logout-icon.png" alt="" class="icon">
+                                <span>Log out</span>
+                            </div>
+                        </div>
+
+                        <div class="theme-wrapper">
+                            <div class="theme">
+                                <img src="img/sun-logo.png" alt="" class="small-icon">
+                                <img src="img/moon-logo.png" alt="" class="small-icon">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="">
+                    <div class="" style="padding: 15px 0px; text-align: center; font-size: 36px;">
+                        <p class="mb-0">Search Internships</p>
+                    </div>
+                    <div class="container2">
+                        <div style="display: flex;">
+                            <img src="img/star-icon.png" alt="" width="">
+                            <div class="filter" style="padding-left: 120px;">
+                                <img src="img/filter-vertical-icon.png" alt="" class="icon">
+                                <span>Filters</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="filter-menu" style="padding: 20px">
+                            <div class="input">
+                                <label for="">Profile</label>
+                                <input type="text" name="" id="" placeholder="e.g UI/UX, Developer, Marketing">
+                            </div>
+                            <div class="input">
+                                <label for="">Location</label>
+                                <input type="text" name="" id="" placeholder="e.g Delhi">
+                            </div>
+                            <div class="input">
+                                <label for="">Internship Type</label>
+                                <div class="internship_type">
+                                    <div>
+                                        <input type="radio" name="radio" id="radio1">
+                                        <label>Full Time</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="radio" id="radio2">
+                                        <label>Part Time</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="radio" id="radio3">
+                                        <label>Work From Home</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="radio" id="radio4">
+                                        <label>Regular ( In-office/ On field
+                                            )</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input">
+                                <label for="">Minimum Monthly Stipend</label>
+                                <div>
+                                    <input type="range" name="" class="range-input" id="range" min="0" max="100"
+                                        value="100" style="width: 100%; accent-color: #9747FF;">
+                                </div>
+                                <div class="ranges">
+                                    <span data-value="0">0</span>
+                                    <span class="range" data-value="20">5k</span>
+                                    <span class="range" data-value="40">10k</span>
+                                    <span class="range" data-value="60">15k</span>
+                                    <span class="range" data-value="80">20k</span>
+                                    <span class="range" data-value="100">25k+</span>
+                                </div>
+                            </div>
+                            <div class="input">
+                                <label for="">Internships Duration</label>
+                                <select name="" id="">
+                                    <option value="" selected disabled>Duration</option>
+                                    <option value="1">1 Month</option>
+                                    <option value="2">2 Months</option>
+                                    <option value="3">3 Months</option>
+                                    <option value="6">6 Months</option>
+                                </select>
+
+                            </div>
+                            <div class="input">
+                                <label for="">Starting From ( Or After )</label>
+                                <input type="date" name="" id="" placeholder="Duration">
+                            </div>
+                        </div>
+                        <div class="button" style="display: flex; justify-content: space-between;">
+                            <div>
+                                <button class="white-btn">Clear all</button>
+                            </div>
+                            <div>
+                                <button class="color-btn">Apply</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-12 col-sm-12">
+                <div class="">
+                    <div class="" style="padding: 50px 0px 0px 0px; text-align: center;">
+                        <p style="color: #c4c4c4; font-size: 14px;">
+                            Showing <span style="color: black;">122 Total Internships</span>
+                        </p>
+                    </div>
+                    <div class="container3" id="container3">
+                        <div class="searchbar">
+                            <img src="img/search-icon.png" alt="" width="32">
+                            <input type="text" name="main-search" id="main-search" placeholder="Search Internships">
+                        </div>
+
+                        <div class="cards">
+                            <div class="card-container">
+                                <div class="c-header">
+                                    <div style="border: 1px solid #c4c4c4; border-radius: 20px; padding: 0px 5px;">
+                                        <img src="img/straight-edge.png" alt="" class="icon">
+                                        <span>On hiring</span>
+                                    </div>
+                                    <div style="display: flex; gap: 20px;">
+                                        <img src="img/bookmark-02.png" alt="" class="icon">
+                                        <img src="img/share-01.png" alt="" class="icon">
+                                    </div>
+                                </div>
+                                <div class="c-body">
+                                    <div class="c-name">
+                                        <div>
+                                            <h5>
+                                                <b>UI/UX Design</b>
+                                            </h5>
+                                            <p>
+                                                PlanCover
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="img/company1.png" alt="PlanCover" class="comapany">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <img src="img/location-06.png" alt="" class="small-icon">
+                                            <span>Delhi, Gurugram</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-details">
+                                        <div>
+                                            <img src="img/start-date-icon.png" alt="" class="small-icon">
+                                            <span>START DATE</span>
+                                        </div>
+                                        <div>
+                                            <img src="img/calendar-03.png" alt="" class="small-icon">
+                                            <span>DURATION</span>
+                                        </div>
+                                        <div>
+                                            <img src="img/money-03.png" alt="" class="small-icon">
+                                            <span>Stipend</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-details-data">
+                                        <p>Immediately</p>
+                                        <p>6 months</p>
+                                        <p>₹ 10,000 /month</p>
+                                    </div>
+
+                                    <div class="card-tags">
+                                        <div class="remain-time">
+                                            <img src="img/clock-02.png" alt="" class="small-icon">
+                                            <span>Today 1h 23m</span>
+                                        </div>
+                                        <div class="jobtype">
+                                            <img src="img/job-link.png" alt="" class="small-icon">
+                                            <span>Internship</span>
+                                        </div>
+                                    </div>
+                                    <hr style="color: #c4c4c4;">
+                                    <div class="card-button" style="display: flex; justify-content: end; gap: 20px;">
+                                        <div>
+                                            <button class="white-btn">View Details</button>
+                                        </div>
+                                        <div>
+                                            <button class="color-btn">Apply Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-container">
+                                <div class="c-header">
+                                    <div style="border: 1px solid #c4c4c4; border-radius: 20px; padding: 0px 5px;">
+                                        <img src="img/straight-edge.png" alt="" class="icon">
+                                        <span>On hiring</span>
+                                    </div>
+                                    <div style="display: flex; gap: 20px;">
+                                        <img src="img/bookmark-02.png" alt="" class="icon">
+                                        <img src="img/share-01.png" alt="" class="icon">
+                                    </div>
+                                </div>
+                                <div class="c-body">
+                                    <div class="c-name">
+                                        <div>
+                                            <h5>
+                                                <b>Business Development Executive</b>
+                                            </h5>
+                                            <p>
+                                                Hungama
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="img/company2.png" alt="Hungama" class="comapany">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <img src="img/location-06.png" alt="" class="small-icon">
+                                            <span>Delhi, Gurugram</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-details">
+                                        <div>
+                                            <img src="img/start-date-icon.png" alt="" class="small-icon">
+                                            <span>START DATE</span>
+                                        </div>
+                                        <div>
+                                            <img src="img/calendar-03.png" alt="" class="small-icon">
+                                            <span>DURATION</span>
+                                        </div>
+                                        <div>
+                                            <img src="img/money-03.png" alt="" class="small-icon">
+                                            <span>Stipend</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-details-data">
+                                        <p>Immediately</p>
+                                        <p>6 months</p>
+                                        <p>₹ 10,000 /month</p>
+                                    </div>
+
+                                    <div class="card-tags">
+                                        <div class="remain-time">
+                                            <img src="img/clock-02.png" alt="" class="small-icon">
+                                            <span>Today 1h 23m</span>
+                                        </div>
+                                        <div class="jobtype">
+                                            <img src="img/job-link.png" alt="" class="small-icon">
+                                            <span>Internship</span>
+                                        </div>
+                                    </div>
+                                    <hr style="color: #c4c4c4;">
+                                    <div class="card-button" style="display: flex; justify-content: end; gap: 20px;">
+                                        <div>
+                                            <button class="white-btn">View Details</button>
+                                        </div>
+                                        <div>
+                                            <button class="color-btn">Apply Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-container">
+                                <div class="c-header">
+                                    <div style="border: 1px solid #c4c4c4; border-radius: 20px; padding: 0px 5px;">
+                                        <img src="img/straight-edge.png" alt="" class="icon">
+                                        <span>On hiring</span>
+                                    </div>
+                                    <div style="display: flex; gap: 20px;">
+                                        <img src="img/bookmark-02.png" alt="" class="icon">
+                                        <img src="img/share-01.png" alt="" class="icon">
+                                    </div>
+                                </div>
+                                <div class="c-body">
+                                    <div class="c-name">
+                                        <div>
+                                            <h5>
+                                                <b>UI/UX Design</b>
+                                            </h5>
+                                            <p>
+                                                Wipro
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="img/company3.png" alt="Wipro" class="comapany">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <img src="img/location-06.png" alt="" class="small-icon">
+                                            <span>Delhi, Gurugram</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-details">
+                                        <div>
+                                            <img src="img/start-date-icon.png" alt="" class="small-icon">
+                                            <span>START DATE</span>
+                                        </div>
+                                        <div>
+                                            <img src="img/calendar-03.png" alt="" class="small-icon">
+                                            <span>DURATION</span>
+                                        </div>
+                                        <div>
+                                            <img src="img/money-03.png" alt="" class="small-icon">
+                                            <span>Stipend</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-details-data">
+                                        <p>Immediately</p>
+                                        <p>6 months</p>
+                                        <p>₹ 10,000 /month</p>
+                                    </div>
+
+                                    <div class="card-tags">
+                                        <div class="remain-time">
+                                            <img src="img/clock-02.png" alt="" class="small-icon">
+                                            <span>Today 1h 23m</span>
+                                        </div>
+                                        <div class="jobtype">
+                                            <img src="img/job-link.png" alt="" class="small-icon">
+                                            <span>Internship</span>
+                                        </div>
+                                    </div>
+                                    <hr style="color: #c4c4c4;">
+                                    <div class="card-button" style="display: flex; justify-content: end; gap: 20px;">
+                                        <div>
+                                            <button class="white-btn">View Details</button>
+                                        </div>
+                                        <div>
+                                            <button class="color-btn">Apply Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-container">
+                                <div class="c-header">
+                                    <div style="border: 1px solid #c4c4c4; border-radius: 20px; padding: 0px 5px;">
+                                        <img src="img/straight-edge.png" alt="" class="icon">
+                                        <span>On Going</span>
+                                    </div>
+                                    <div style="display: flex; gap: 20px;">
+                                        <img src="img/bookmark-02.png" alt="" class="icon">
+                                        <img src="img/share-01.png" alt="" class="icon">
+                                    </div>
+                                </div>
+                                <div class="c-body">
+                                    <div class="c-name">
+                                        <div>
+                                            <h5>
+                                                <b>UI/UX Design</b>
+                                            </h5>
+                                            <p>
+                                                PlanCover
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="img/company1.png" alt="PlanCover" class="comapany">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <img src="img/location-06.png" alt="" class="small-icon">
+                                            <span>Delhi, Gurugram</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-details">
+                                        <div>
+                                            <img src="img/start-date-icon.png" alt="" class="small-icon">
+                                            <span>START DATE</span>
+                                        </div>
+                                        <div>
+                                            <img src="img/calendar-03.png" alt="" class="small-icon">
+                                            <span>DURATION</span>
+                                        </div>
+                                        <div>
+                                            <img src="img/money-03.png" alt="" class="small-icon">
+                                            <span>Stipend</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-details-data">
+                                        <p>Immediately</p>
+                                        <p>6 months</p>
+                                        <p>₹ 10,000 /month</p>
+                                    </div>
+
+                                    <div class="card-tags">
+                                        <div class="remain-time">
+                                            <img src="img/clock-02.png" alt="" class="small-icon">
+                                            <span>Today 1h 23m</span>
+                                        </div>
+                                        <div class="jobtype">
+                                            <img src="img/job-link.png" alt="" class="small-icon">
+                                            <span>Internship</span>
+                                        </div>
+                                    </div>
+                                    <hr style="color: #c4c4c4;">
+                                    <div class="card-button" style="display: flex; justify-content: end; gap: 20px;">
+                                        <div>
+                                            <button class="white-btn">View Details</button>
+                                        </div>
+                                        <div>
+                                            <button class="color-btn">Apply Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-container">
+                                <div class="c-header">
+                                    <div style="border: 1px solid #c4c4c4; border-radius: 20px; padding: 0px 5px;">
+                                        <img src="img/straight-edge.png" alt="" class="icon">
+                                        <span>On Going</span>
+                                    </div>
+                                    <div style="display: flex; gap: 20px;">
+                                        <img src="img/bookmark-02.png" alt="" class="icon">
+                                        <img src="img/share-01.png" alt="" class="icon">
+                                    </div>
+                                </div>
+                                <div class="c-body">
+                                    <div class="c-name">
+                                        <div>
+                                            <h5>
+                                                <b>UI/UX Design</b>
+                                            </h5>
+                                            <p>
+                                                PlanCover
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="img/company1.png" alt="PlanCover" class="comapany">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <img src="img/location-06.png" alt="" class="small-icon">
+                                            <span>Delhi, Gurugram</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-details">
+                                        <div>
+                                            <img src="img/start-date-icon.png" alt="" class="small-icon">
+                                            <span>START DATE</span>
+                                        </div>
+                                        <div>
+                                            <img src="img/calendar-03.png" alt="" class="small-icon">
+                                            <span>DURATION</span>
+                                        </div>
+                                        <div>
+                                            <img src="img/money-03.png" alt="" class="small-icon">
+                                            <span>Stipend</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-details-data">
+                                        <p>Immediately</p>
+                                        <p>6 months</p>
+                                        <p>₹ 10,000 /month</p>
+                                    </div>
+
+                                    <div class="card-tags">
+                                        <div class="remain-time">
+                                            <img src="img/clock-02.png" alt="" class="small-icon">
+                                            <span>Today 1h 23m</span>
+                                        </div>
+                                        <div class="jobtype">
+                                            <img src="img/job-link.png" alt="" class="small-icon">
+                                            <span>Internship</span>
+                                        </div>
+                                    </div>
+                                    <hr style="color: #c4c4c4;">
+                                    <div class="card-button" style="display: flex; justify-content: end; gap: 20px;">
+                                        <div>
+                                            <button class="white-btn">View Details</button>
+                                        </div>
+                                        <div>
+                                            <button class="color-btn">Apply Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-container">
+                                <div class="c-header">
+                                    <div style="border: 1px solid #c4c4c4; border-radius: 20px; padding: 0px 5px;">
+                                        <img src="img/straight-edge.png" alt="" class="icon">
+                                        <span>On Going</span>
+                                    </div>
+                                    <div style="display: flex; gap: 20px;">
+                                        <img src="img/bookmark-02.png" alt="" class="icon">
+                                        <img src="img/share-01.png" alt="" class="icon">
+                                    </div>
+                                </div>
+                                <div class="c-body">
+                                    <div class="c-name">
+                                        <div>
+                                            <h5>
+                                                <b>UI/UX Design</b>
+                                            </h5>
+                                            <p>
+                                                PlanCover
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <img src="img/company1.png" alt="PlanCover" class="comapany">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <img src="img/location-06.png" alt="" class="small-icon">
+                                            <span>Delhi, Gurugram</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-details">
+                                        <div>
+                                            <img src="img/start-date-icon.png" alt="" class="small-icon">
+                                            <span>START DATE</span>
+                                        </div>
+                                        <div>
+                                            <img src="img/calendar-03.png" alt="" class="small-icon">
+                                            <span>DURATION</span>
+                                        </div>
+                                        <div>
+                                            <img src="img/money-03.png" alt="" class="small-icon">
+                                            <span>Stipend</span>
+                                        </div>
+                                    </div>
+                                    <div class="card-details-data">
+                                        <p>Immediately</p>
+                                        <p>6 months</p>
+                                        <p>₹ 10,000 /month</p>
+                                    </div>
+
+                                    <div class="card-tags">
+                                        <div class="remain-time">
+                                            <img src="img/clock-02.png" alt="" class="small-icon">
+                                            <span>Today 1h 23m</span>
+                                        </div>
+                                        <div class="jobtype">
+                                            <img src="img/job-link.png" alt="" class="small-icon">
+                                            <span>Internship</span>
+                                        </div>
+                                    </div>
+                                    <hr style="color: #c4c4c4;">
+                                    <div class="card-button" style="display: flex; justify-content: end; gap: 20px;">
+                                        <div>
+                                            <button class="white-btn">View Details</button>
+                                        </div>
+                                        <div>
+                                            <button class="color-btn">Apply Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer ">
+        <div class="" style="text-align: center;">
+            <a href="" id="scrollToTopArrow">
+                <img src="img/arrow-icon.png" alt="" class="icon arrow">
+            </a>
+            <p>
+                Press Up for navigate on top
+            </p>
+        </div>
+
+        <div class="footer-container container">
+            <div class="footer-div">
+                <img src="img/logo-white.png" alt="" width="155">
+                <p style="margin-top: 8px;">We Believe in Practical Training and work experience</p>
+                <div class="">
+                    <p>Connections</p>
+                    <div class="social-media">
+                        <img src="img/instagram-logo.png" alt="" class="icon">
+                        <img src="img/facebook-logo.png" alt="" class="icon">
+                        <img src="img/new-twitter-logo.png" alt="" class="icon">
+                        <img src="img/youtube-logo.png" alt="" class="icon">
+                    </div>
+                </div>
+            </div>
+            <div class="footer-div">
+                <h4>
+                    Institute
+                </h4>
+                <a href="">About Us</a>
+                <a href="">Trainers</a>
+                <a href="">Contact Us</a>
+            </div>
+            <div class="footer-div">
+                <h4>
+                    Our Offices
+                </h4>
+                <a href="">Pune-India</a>
+                <a href="">Singapore</a>
+            </div>
+            <div class="footer-div">
+                <h4>
+                    InternMeets
+                </h4>
+                <a href="">Blog </a>
+                <a href="">Our Service</a>
+            </div>
+            <div class="footer-div">
+                <h4>
+                    Subscribe Newsletter
+                </h4>
+                <p>Subscribe Newsletter to gets Updates</p>
+                <div class="subscribe">
+                    <input type="email" name="" id="" placeholder="Your Email Address">
+                    <button>Join</button>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; padding-top: 40px; font-size: 14px;">
+            <p>
+                Copyright © 2024 All rights reserved | Powered by InternMeets
+            </p>
+        </div>
+    </div>
+
+
+
+    <script src="index.js"></script>
+    <script>
+        const hamburger = document.getElementById("hamburger");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        hamburger.addEventListener("click", () => {
+            mobileMenu.classList.toggle("active");
+        })
+
+
+        const scrollToTopArrow = document.getElementById("scrollToTopArrow");
+        scrollToTopArrow.onclick = function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            })
+        }
+
+        const rangeElements = document.querySelectorAll(".range");
+        const rangeInput = document.getElementById("range");
+        rangeElements.forEach(span => {
+            span.addEventListener("click", () => {
+                rangeInput.value = span.dataset.value
+            })
+        })
+    </script>
+</body>
+
+</html>
