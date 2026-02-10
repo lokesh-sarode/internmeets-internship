@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theme Toggle</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            transition: background-color 0.4s, color 0.4s;
+        }
+
+        /* Global theme */
+        body.dark-theme {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .main-container {
+            width: 60%;
+            margin: 50px auto;
+        }
+
+        .theme-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+
+        .theme {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 3px;
+            border-radius: 30px;
+            cursor: pointer;
+            background: linear-gradient(#000, #444, #fff);
+        }
+
+        /* Base (inactive) icon state */
+        .theme img {
+            width: 26px;
+            border-radius: 50%;
+            transform: scale(0.9) rotate(0deg);
+            opacity: 0.6;
+            transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
+        }
+
+        /* Default: moon active */
+        .theme:not(.light-mode) #moon {
+            transform: scale(1.15) rotate(-360deg);
+            opacity: 1;
+            filter: drop-shadow(0 0 2px white);
+        }
+
+        /* Light mode: sun active */
+        .theme.light-mode #sun {
+            transform: scale(1.15) rotate(360deg);
+            opacity: 1;
+            filter: drop-shadow(0 0 2px white);
+        }
+
+        .content {
+            border: 1px solid currentColor;
+            padding: 16px;
+        }
+    </style>
+</head>
+
+<body class="dark-theme">
+
+    <div class="main-container">
+        <div class="theme-wrapper">
+            <div class="theme" id="themeToggle" aria-pressed="true">
+                <img src="img/sun-02.png" alt="Light theme" id="sun">
+                <img src="img/moon-02.png" alt="Dark theme" id="moon">
+            </div>
+        </div>
+
+        <div class="content">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint quaerat suscipit animi quam, non libero ex
+            minus ipsa ipsum, eos accusamus pariatur beatae, rerum explicabo fuga perferendis error voluptate ducimus.
+        </div>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById("themeToggle");
+
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-theme");
+            themeToggle.classList.toggle("light-mode");
+
+            const isDark = document.body.classList.contains("dark-theme");
+            themeToggle.setAttribute("aria-pressed", isDark);
+        });
+    </script>
+
+</body>
+
+</html>

@@ -27,7 +27,16 @@
 
         body {
             font-family: 'Hero Light Regular';
+            margin: 0;
+            transition: background-color 0.4s, color 0.4s;
         }
+
+        /* Global theme */
+        body.dark-theme {
+            background-color: #000;
+            color: #fff;
+        }
+
 
         .header {
             display: flex;
@@ -200,7 +209,13 @@
 
         /* navigation ends */
 
-
+        .offer-div {
+            font-size: 18px;
+            text-align: center;
+            background-color: #f1f1f1;
+            color: black;
+            padding: 20px 0px 10px 0px;
+        }
 
         .row {
             margin-bottom: 30px;
@@ -209,6 +224,7 @@
         .container1 {
             border-radius: 30px;
             background-color: #f1f1f1;
+            color: #000;
             padding: 15px;
         }
 
@@ -226,7 +242,7 @@
             display: flex;
             gap: 15px;
             flex-direction: column;
-            width: fit-content;
+            padding: 3px;
             background: linear-gradient(black, rgb(110, 110, 110), white);
             border-radius: 30px;
         }
@@ -239,8 +255,29 @@
         }
 
         .theme img {
-            width: 28px;
+            width: 26px;
+            border-radius: 50%;
+            transform: scale(1) rotate(0deg);
+            opacity: 0.6;
+            transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
         }
+
+        .theme.light-mode #sun {
+            transform: scale(1.15) rotate(360deg);
+            opacity: 1;
+            filter: drop-shadow(0 0 2px white);
+        }
+
+        body.dark-theme .theme #moon {
+            transform: scale(1.15) rotate(-360deg);
+            opacity: 1;
+            filter: drop-shadow(0 0 2px white);
+        }
+
+        body.dark-theme .header {
+            color: white;
+        }
+
 
         .filter img {
             width: 24px;
@@ -444,12 +481,12 @@
             transition: 0.3S;
         }
 
+        .active {
+            color: black;
+            background-color: #c4c4c4;
+        }
 
         @media screen and (max-width:320px) {
-            .ranges {
-                /* justify-content: space-betweens; */
-            }
-
             .ranges span {
                 font-size: 14px;
                 padding: 5px;
@@ -524,7 +561,7 @@
     </style>
 </head>
 
-<body>
+<body class="light-mode">
     <div class="header container">
         <div>
             <img src="img/logo-black.png" alt="">
@@ -628,7 +665,7 @@
         </div>
     </div>
 
-    <div style="font-size: 18px; text-align: center; background-color: #f1f1f1; padding: 20px 0px 10px 0px;">
+    <div class="offer-div">
         <p class="mb-0">
             Unlock Your Career
         </p>
@@ -706,9 +743,9 @@
                         </div>
 
                         <div class="theme-wrapper">
-                            <div class="theme">
-                                <img src="img/sun-logo.png" alt="" class="small-icon">
-                                <img src="img/moon-logo.png" alt="" class="small-icon">
+                            <div class="theme light-mode" id="themeToggle" aria-pressed="false">
+                                <img src="img/sun-02.png" alt="light-theme" class="small-icon" id="sun">
+                                <img src="img/moon-logo.png" alt="dark-theme" class="small-icon" id="moon">
                             </div>
                         </div>
 
@@ -1348,6 +1385,16 @@
                 rangeInput.value = span.dataset.value
             })
         })
+
+        // Theme toggle logic
+        const themeToggle = document.getElementById("themeToggle");
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-theme");
+            themeToggle.classList.toggle("light-mode");
+
+            const isDark = document.body.classList.contains("dark-theme");
+            themeToggle.setAttribute("aria-pressed", isDark);
+        });
     </script>
 </body>
 
