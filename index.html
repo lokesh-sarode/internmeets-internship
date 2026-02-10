@@ -274,9 +274,16 @@
             filter: drop-shadow(0 0 2px white);
         }
 
-        body.dark-theme .header {
+        body.dark-theme .header.nav a,
+        body.dark-theme .header button {
             color: white;
         }
+
+        body.dark-theme .header .nav img,
+        body.dark-theme .header .nav-extras img {
+            filter: invert(1);
+        }
+
 
 
         .filter img {
