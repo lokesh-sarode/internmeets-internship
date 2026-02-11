@@ -33,8 +33,12 @@
 
         /* Global theme */
         body.dark-theme {
-            background-color: #000;
             color: #fff;
+            background-color: #000;
+            /* background: linear-gradient(black, rgb(51, 22, 63), rgb(83, 0, 179));
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center; */
         }
 
 
@@ -111,6 +115,10 @@
         .profile-popup a:hover {
             text-decoration: none;
             color: #9747FF;
+        }
+
+        #internships {
+            border-radius: 50%;
         }
 
 
@@ -275,15 +283,37 @@
         }
 
         body.dark-theme .header.nav a,
-        body.dark-theme .header button {
+        body.dark-theme .header button,
+        body.dark-theme .total-internships {
             color: white;
         }
 
         body.dark-theme .header .nav img,
         body.dark-theme .header .nav-extras img {
-            filter: invert(1);
+            filter: invert(1) hue-rotate(180deg);
         }
 
+        body.dark-theme .jobtype span {
+            color: black;
+        }
+
+
+        body.dark-theme span img {
+            border-radius: 50%;
+        }
+
+        #logo-white {
+            display: none;
+        }
+
+        body.dark-theme #logo-white {
+            display: block;
+            width: 155px;
+        }
+
+        body.dark-theme #logo-black {
+            display: none;
+        }
 
 
         .filter img {
@@ -299,6 +329,7 @@
             border: 1px solid black;
             border-radius: 30px;
             padding: 10px;
+            cursor: pointer;
         }
 
         .filter-menu .input {
@@ -333,6 +364,10 @@
         }
 
         /* background-color: white; */
+
+        .total-internships {
+            color: black;
+        }
 
         .container3 .cards {
             height: 130vh;
@@ -564,6 +599,11 @@
             .footer-container {
                 flex-wrap: wrap;
             }
+
+            body.dark-theme .header .nav img,
+            body.dark-theme .header .nav-extras img {
+                filter: invert(0) hue-rotate(0deg);
+            }
         }
     </style>
 </head>
@@ -571,7 +611,8 @@
 <body class="light-mode">
     <div class="header container">
         <div>
-            <img src="img/logo-black.png" alt="">
+            <img src="img/logo-black.png" alt="" id="logo-black">
+            <img src="img/logo-white.png" alt="" id="logo-white">
         </div>
 
         <div class="hamburger" id="hamburger">☰</div>
@@ -851,7 +892,7 @@
                 <div class="">
                     <div class="" style="padding: 50px 0px 0px 0px; text-align: center;">
                         <p style="color: #c4c4c4; font-size: 14px;">
-                            Showing <span style="color: black;">122 Total Internships</span>
+                            Showing <span class="total_internships">122 Total Internships</span>
                         </p>
                     </div>
                     <div class="container3" id="container3">
