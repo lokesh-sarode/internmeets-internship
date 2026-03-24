@@ -237,6 +237,7 @@
 
  .container1 .menu div {
      padding-bottom: 40px;
+     cursor: pointer;
  }
 
  .theme {
@@ -282,7 +283,8 @@
  }
 
  body.dark-theme .header .nav img,
- body.dark-theme .header .nav-extras img {
+ body.dark-theme .header .nav-extras img,
+ body.dark-theme .container2 img {
      filter: invert(1) hue-rotate(180deg);
  }
 
@@ -354,6 +356,10 @@
      border: 1px solid #c4c4c4;
      border-radius: 20px;
      padding: 5px 20px;
+ }
+
+ input[type="radio"] {
+     accent-color: #9747FF;
  }
 
  /* background-color: white; */
@@ -518,7 +524,8 @@
 
 
  .white-btn:active,
- .color-btn:active {
+ .color-btn:active,
+ .theme:active {
      scale: 0.95;
  }
 

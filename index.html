@@ -13,6 +13,10 @@
     <link href='https://fonts.cdnfonts.com/css/oswald-4' rel='stylesheet'>
     <link rel="stylesheet" href="style.css">
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         @media screen and (max-width:320px) {
             .ranges span {
                 font-size: 14px;
@@ -102,6 +106,10 @@
 
             .nav-extras {
                 gap: 10px;
+            }
+
+            #home-dot {
+                right: 50%;
             }
         }
     </style>
@@ -224,13 +232,13 @@
     <div class="container">
         <div style="display: flex; gap:10px ; padding: 20px 0;">
             <p>
-                Home
+                <a href="home.html" class="navLink">Home</a>
             </p>
             <p>
                 >
             </p>
             <p>
-                Internships
+                <a href="#" class="navLink">Internships</a>
             </p>
         </div>
     </div>
@@ -327,19 +335,19 @@
                                 <div class="internship_type">
                                     <div>
                                         <input type="radio" name="radio" id="radio1">
-                                        <label>Full Time</label>
+                                        <label for="radio1">Full Time</label>
                                     </div>
                                     <div>
                                         <input type="radio" name="radio" id="radio2">
-                                        <label>Part Time</label>
+                                        <label for="radio2">Part Time</label>
                                     </div>
                                     <div>
                                         <input type="radio" name="radio" id="radio3">
-                                        <label>Work From Home</label>
+                                        <label for="radio3">Work From Home</label>
                                     </div>
                                     <div>
                                         <input type="radio" name="radio" id="radio4">
-                                        <label>Regular ( In-office/ On field
+                                        <label for="radio4">Regular ( In-office/ On field
                                             )</label>
                                     </div>
                                 </div>
