@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>
+        Home
+    </title>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' rel='stylesheet'
+        integrity='sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB' crossorigin='anonymous'>
+    <link href='https://fonts.cdnfonts.com/css/open-sans' rel='stylesheet'>
+    <link href='https://fonts.cdnfonts.com/css/oswald-4' rel='stylesheet'>
+    <link rel="stylesheet" href="/styles/home.css">
+    <script src="https://kit.fontawesome.com/9194630113.js" crossorigin="anonymous"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Hero Light Regular';
+            font-style: normal;
+            font-weight: normal;
+            src: local('Hero Light Regular'), url('./hero-font/HeroLight-Regular.woff') format('woff');
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media screen and (max-width:320px) {
+            .line {
+                width: 175px;
+            }
+
+            .box-cont {
+                padding: 20px !important;
+            }
+        }
+
+        @media screen and (max-width:425px) {
+            .footer-container {
+                justify-content: start;
+                gap: 20px;
+            }
+
+            .footer-container .footer-div {
+                gap: 0px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+            }
+
+            .footer-container .subscribe {
+                padding: 5px;
+                width: fit-content;
+            }
+
+            .box-container {
+                flex-direction: column;
+            }
+
+            .box-cont {
+                width: 100%;
+            }
+
+            .box-cont .container {
+                padding: 0 !important;
+            }
+
+            .banner .container {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .container .card {
+                width: 100%;
+            }
+
+        }
+
+        @media screen and (max-width:1024px) {
+
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                padding-right: 10px;
+            }
+
+            .mobile-menu {
+                display: none;
+                position: absolute;
+                top: 75px;
+                right: 0;
+                background: #fff;
+
+                flex-direction: column-reverse;
+                justify-content: flex-start;
+                gap: 20px;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            }
+
+            .nav {
+                flex-direction: column;
+                align-items: start;
+            }
+
+            .searchbar .main-search {
+                max-width: fit-content;
+            }
+
+            .mobile-menu.active {
+                display: flex;
+            }
+
+            .footer-container {
+                flex-wrap: wrap;
+            }
+
+            body.dark-theme .header .nav img,
+            body.dark-theme .header .nav-extras img {
+                filter: invert(0) hue-rotate(0deg);
+            }
+        }
+
+        @media screen and (min-width:1024px) {
+            .nav {
+                gap: 10px;
+            }
+
+            .nav-trigger {
+                gap: 3px;
+            }
+
+            .nav-extras {
+                gap: 10px;
+            }
+
+            #home-dot {
+                right: 50%;
+            }
+        }
+    </style>
+</head>
+
+<body class="light-mode">
+
+    <div class="header container">
+        <div>
+            <img src="img/logo-black.png" alt="" id="logo-black">
+            <!-- <img src="img/logo-white.png" alt="" id="logo-white"> -->
+        </div>
+
+        <div class="hamburger" id="hamburger">☰</div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="nav">
+                <div class="nav-item">
+                    <button class="nav-trigger">
+                        Internships
+                        <span id="internships"><img src="img/arrow-icon.png" alt="" width="20px"></span>
+                    </button>
+                    <div class="nav-popup">
+                        <a href="#">Web Development</a>
+                        <a href="#">Android</a>
+                        <a href="#">Data Science</a>
+                    </div>
+                </div>
+
+                <div class="nav-item">
+                    <button class="nav-trigger">
+                        Jobs
+                        <span id="jobs"><img src="img/arrow-icon.png" alt="" width="20px"></span>
+                    </button>
+                    <div class="nav-popup">
+                        <a href="#">Fresher Jobs</a>
+                        <a href="#">Remote Jobs</a>
+                        <a href="#">Part Time</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-trigger">
+                        Certification Courses
+                        <span id="courses"><img src="img/arrow-icon.png" alt="" width="20px"></span>
+                    </button>
+                    <div class="nav-popup">
+                        <a href="#">Full Stack Web Development</a>
+                        <a href="#">Frontend Development</a>
+                        <a href="#">Backend Development</a>
+                        <a href="#">Mobile App Development</a>
+                        <a href="">Data Science</a>
+                        <a href="">Data Analytics</a>
+                        <a href="">Cloud Computing</a>
+                        <a href="">Ethical Hacking</a>
+                        <a href="">SOC Analyst</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-trigger">
+                        Training
+                        <span id="training"><img src="img/arrow-icon.png" alt="" width="20px"></span>
+                    </button>
+                    <div class="nav-popup">
+                        <a href="#">Programming Languages</a>
+                        <a href="#">Web Technologies</a>
+                        <a href="#">Data Tools</a>
+                        <a href="">Cloud Tools</a>
+                        <a href="">Testing & QA</a>
+                        <a href="">Deployment Training</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <button class="nav-trigger">
+                        More
+                        <span id="more"><img src="img/arrow-icon.png" alt="" width="20px"></span>
+                    </button>
+                    <div class="nav-popup">
+                        <a href="#">Career Resources</a>
+                        <a href="#">Scholarships</a>
+                        <a href="#">Competitions & Hackathons</a>
+                        <a href="">Bootcamps</a>
+                        <a href="">Mentorship Programs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="searchbar main-search">
+                <img src="img/search-icon.png" alt="" width="32">
+                <input type="text" name="main-search" id="main-search" placeholder="Search Internships">
+            </div>
+            <div class="nav-extras">
+                <img src="img/bookmark-icon.png" alt="" class="icon">
+                <img src="img/message-icon.png" alt="" class="icon">
+                <div class="notification">
+                    <img src="img/notification-icon.png" alt="" class="icon">
+                    <span id="notification-dot"></span>
+                </div>
+
+                <div class="profile profile-item">
+                    <img src="img/user-profile-icon.webp" alt="" class="profile-icon">
+                    <span class="profile-trigger"><img src="img/arrow-icon.png" alt="" class="icon"></span>
+                    <div class="profile-popup">
+                        <a href="">Profile</a>
+                        <a href="">Username</a>
+                        <a href="">Account Settings</a>
+                        <a href="">Privacy & Security</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container pb-3">
+        <div class="button">
+            <a href="index.html" class="navLink"> <i class="fa-solid fa-arrow-left"></i>
+                Back To my application</a>
+        </div>
+    </div>
+
+    <section class="banner mb-4">
+        <div class="container">
+            <div class="textContent">
+                <h1 style="font-weight: 700; line-height: 52px;">Career starter Internships</h1>
+                <h3 style="font-weight: 700; line-height: 52px;">Your Career is about to lunch up!</h3>
+                <ul style="padding-left: 20px;">
+                    <li>Earn stipend up to 1 lakhs</li>
+                    <li>No Experience required</li>
+                </ul>
+            </div>
+            <div class="card text-center p-4">
+                <p>Awesome! You have been registered for the campaign. Invite your friends to unlock your entry ticket.
+                </p>
+                <button class="btn w-100">Join Now</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="intro container text-center py-3">
+        <div class="py-3">
+            <h2 style="font-weight: 700; line-height: 52px;">Hey Pal, we're back to launch your career!</h2>
+            <p>
+                Now, you and the students of Jogeshwari don’t have to wait anymore to begin their experience-based
+                learning. With Career Starter Internships, you can give your career a great launch for the independent
+                you! In our last edition, we helped over 15,000+ students get started with an internship and this time
+                we hope to help you too.
+            </p>
+        </div>
+
+        <div class="py-3">
+            <h3 style="font-weight: 700;">
+                What’s in it for you?
+            </h3>
+
+            <div class="box-container d-flex gap-5">
+                <div class="box">
+                    <div class="p-4">
+                        <img src="img/home/internships-count.png" alt="" width="125" height="125">
+                    </div>
+                    <p>
+                        32,000+ Easy-to-do Internships
+                    </p>
+                    <p>
+                        No prior experience needed! Exclusive internships for 1st and 2nd-year students in simple and
+                        skillful profiles like data entry, content writing, social media marketing, and more
+                    </p>
+                </div>
+                <div class="box">
+                    <div class="p-4">
+                        <img src="img/home/stipend.png" alt="" width="125" height="125">
+                    </div>
+                    <p>
+                        Amazing Stipend
+                    </p>
+                    <p>
+                        With a high stipend up to ₹1.95 lacs plan to buy your next phone, guitar or that insane drone
+                        you always wanted - on your own terms and with your own money!
+                    </p>
+                </div>
+                <div class="box">
+                    <div class="p-4">
+                        <img src="img/home/entry-ticket.png" alt="" width="125" height="125">
+                    </div>
+                    <p>
+                        Entry Ticket Contest
+                    </p>
+                    <p>
+                        Participate in the entry ticket contest to unlock access to the internships and win an exciting
+                        Paytm cash reward of up to ₹5,000
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="py-3 container">
+            <h3 class="py-3" style="font-weight: 700;">
+                Dates to remember
+            </h3>
+
+            <div class="d-flex justify-content-center " style="font-weight: 700; gap: 100px; ">
+                <p>1st - 7th February</p>
+                <p>11th - 14th February</p>
+            </div>
+            <div class="d-flex justify-content-center" style="">
+                <div class="d-flex align-items-center py-3" style="position: relative;">
+                    <div class="circle" style="margin-right: -5px;"></div>
+                    <div class="line"></div>
+                    <div class="circle" style="margin-left: -5px;"></div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center py-4" style="gap: 100px; ">
+                <p style="width: 250px;">Grab your entry ticket by participating in the contest</p>
+                <p>Application window</p>
+            </div>
+
+
+            <div class="box-cont border container p-5 my-5">
+                <div class="container d-flex justify-content-center align-items-center flex-column gap-3 px-5">
+                    <h3>Pal, grab your entry ticket by inviting just 5 friends and unlock these amazing internships!
+                    </h3>
+                    <p>Invite 5 friends to unlock entry ticket and get closer to earning a stipend worth ₹1.95 lacs!</p>
+                    <div class="shareBtn">
+                        <button><i class="fa-brands fa-linkedin" style="color: #0077B5;"></i> Share on LinkedIn</button>
+                    </div>
+                    <div class="shareBtn">
+                        <button><i class="fa-solid fa-link" style="color: rgb(116, 192, 252);"></i> Copy Link</button>
+                    </div>
+
+                    <div>
+                        <p><b>Top Rewards</b></p>
+                    </div>
+
+                    <div class=" d-flex flex-column gap-5 ">
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="img/home/entry-ticket.png" alt="" width="71">
+                            <div class="text-start">
+                                <p>
+                                    <b>Unlock your Entry Ticket</b> by getting just 5 referrals and access all
+                                    internships
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="img/home/money.png" alt="" width="71">
+                            <div class="text-start">
+                                <p>
+                                    ₹3,000 Paytm cash if you get the highest referrals
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="img/home/money.png" alt="" width="71">
+                            <div class="text-start">
+                                <p>
+                                    ₹2,000 Paytm cash if you get the 2nd highest referrals
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>
+                        <b>Your Referrals: 00</b>
+                    </h4>
+
+                    <div class="text-start">
+                        <p>
+                            Note:
+                        </p>
+                        <ul>
+                            <li>
+                                People you refer to must complete their email verification
+                            </li>
+                            <li>
+                                Fake or duplicate entries will not be considered for rewards
+                            </li>
+                            <li>
+                                Users who have won the referral reward in the past 4 months will not be eligible for
+                                this campaign's referral reward
+                            </li>
+                            <li>
+                                Winners of this campaign will be announced on 23rd February
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </section>
+
+
+
+
+
+    <div class="footer ">
+        <div class="" style="text-align: center;">
+            <a href="" id="scrollToTopArrow">
+                <img src="img/arrow-icon.png" alt="" class="icon arrow">
+            </a>
+            <p>
+                Press Up for navigate on top
+            </p>
+        </div>
+
+        <div class="footer-container container">
+            <div class="footer-div">
+                <img src="img/logo-white.png" alt="" width="155">
+                <p style="margin-top: 8px;">We Believe in Practical Training and work experience</p>
+                <div class="">
+                    <p>Connections</p>
+                    <div class="social-media">
+                        <img src="img/instagram-logo.png" alt="" class="icon">
+                        <img src="img/facebook-logo.png" alt="" class="icon">
+                        <img src="img/new-twitter-logo.png" alt="" class="icon">
+                        <img src="img/youtube-logo.png" alt="" class="icon">
+                    </div>
+                </div>
+            </div>
+            <div class="footer-div">
+                <h4>
+                    Institute
+                </h4>
+                <a href="">About Us</a>
+                <a href="">Trainers</a>
+                <a href="">Contact Us</a>
+            </div>
+            <div class="footer-div">
+                <h4>
+                    Our Offices
+                </h4>
+                <a href="">Pune-India</a>
+                <a href="">Singapore</a>
+            </div>
+            <div class="footer-div">
+                <h4>
+                    InternMeets
+                </h4>
+                <a href="">Blog </a>
+                <a href="">Our Service</a>
+            </div>
+            <div class="footer-div">
+                <h4>
+                    Subscribe Newsletter
+                </h4>
+                <p>Subscribe Newsletter to gets Updates</p>
+                <div class="subscribe">
+                    <input type="email" name="" id="" placeholder="Your Email Address">
+                    <button>Join</button>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; padding-top: 40px; font-size: 14px;">
+            <p>
+                Copyright © 2024 All rights reserved | Powered by InternMeets
+            </p>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+    <script>
+        const hamburger = document.getElementById("hamburger");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        hamburger.addEventListener("click", () => {
+            mobileMenu.classList.toggle("active");
+        })
+
+
+        const scrollToTopArrow = document.getElementById("scrollToTopArrow");
+        scrollToTopArrow.onclick = function () {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            })
+        }
+
+        const rangeElements = document.querySelectorAll(".range");
+        const rangeInput = document.getElementById("range");
+        rangeElements.forEach(span => {
+            span.addEventListener("click", () => {
+                rangeInput.value = span.dataset.value
+            })
+        })
+
+        // Theme toggle logic
+        const themeToggle = document.getElementById("themeToggle");
+        themeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-theme");
+            themeToggle.classList.toggle("light-mode");
+
+            const isDark = document.body.classList.contains("dark-theme");
+            themeToggle.setAttribute("aria-pressed", isDark);
+        });
+    </script>
+</body>
+
+</html>

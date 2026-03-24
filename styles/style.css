@@ -1,10 +1,3 @@
- @font-face {
-     font-family: 'Hero Light Regular';
-     font-style: normal;
-     font-weight: normal;
-     src: local('Hero Light Regular'), url('./hero-font/HeroLight-Regular.woff') format('woff');
- }
-
  * {
      box-sizing: border-box;
      margin: 0;
